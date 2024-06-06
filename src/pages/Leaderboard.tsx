@@ -1,10 +1,9 @@
 import Bar from "@/components/leaderboard/Bar";
-import Header from "@/components/quiz/Header";
 
 const Leaderboard = () => {
   return (
     <section className="container py-12">
-      <Header />
+      <h2 className="text-4xl font-semibold">Leaderboard🏆</h2>
 
       <div className="flex items-center justify-between mt-12 text-xl font-semibold">
         <h2 className="bg-blue/20 text-blue font-bold px-4 py-2 rounded-lg text-base">
