@@ -1,6 +1,5 @@
 import Bar from "@/components/leaderboard/Bar";
 import Header from "@/components/quiz/Header";
-import React from "react";
 
 const Leaderboard = () => {
   return (
