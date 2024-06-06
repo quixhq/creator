@@ -1,6 +1,5 @@
 import Header from "@/components/quiz/Header";
 import Option from "@/components/quiz/Option";
-import React from "react";
 
 const Quiz = () => {
   return (

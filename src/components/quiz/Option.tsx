@@ -1,5 +1,3 @@
-import React from "react";
-
 const Option = ({ option, number }: { option: string; number: string }) => {
   return (
     <div className="px-6 py-4 rounded-lg border-2 border-blue/40 text-blue font-bold flex items-center">

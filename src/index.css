@@ -1,20 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Quicksand:wght@300;400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Quicksand:wght@300;400;500;600;700&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 * {
-  font-family: 'Quicksand', sans-serif;
+  font-family: "Quicksand", sans-serif;
 }
 
 .dm-serif {
-  font-family: 'DM Serif Text', serif;
+  font-family: "DM Serif Text", serif;
 }
 
 @layer base {
   :root {
-
     /* custom colors */
     --blue: 218 50% 34%;
     --peach: 10 83% 81%;
@@ -106,23 +105,23 @@
 .driver-popover.driverjs-theme .driver-popover-title,
 .driver-popover.driverjs-theme .driver-popover-description,
 .driver-popover.driverjs-theme .driver-popover-next-btn,
-.driver-popover.driverjs-theme .driver-popover-prev-btn{
-  font-family: 'Quicksand', sans-serif;
+.driver-popover.driverjs-theme .driver-popover-prev-btn {
+  font-family: "Quicksand", sans-serif;
 }
-.driver-popover.driverjs-theme .driver-popover-title{
+.driver-popover.driverjs-theme .driver-popover-title {
   font-size: 16px;
   font-weight: 700;
   text-transform: uppercase;
 }
-.driver-popover.driverjs-theme .driver-popover-description{
+.driver-popover.driverjs-theme .driver-popover-description {
   font-size: 14px;
   font-weight: 500;
 }
 .driver-popover.driverjs-theme .driver-popover-close-btn {
-  display: none!important;
+  display: none !important;
 }
 .driver-popover.driverjs-theme .driver-popover-next-btn,
-.driver-popover.driverjs-theme .driver-popover-prev-btn{
+.driver-popover.driverjs-theme .driver-popover-prev-btn {
   background-color: hsl(var(--cyan));
   outline: none;
   border: 1px solid hsl(var(--foreground));
