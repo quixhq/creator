@@ -1,8 +1,10 @@
 import Logo from "@/components/Logo";
 import QR from "../assets/dummyqr.webp";
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 
 const JoinUsers = () => {
+  const navigate = useNavigate();
   return (
     <>
       <section className="container py-8">
@@ -22,7 +24,14 @@ const JoinUsers = () => {
               <p className="text-2xl">Participants joined</p>
             </div>
 
-            <Button className="self-start text-xl mt-6">Start Now</Button>
+            <Button
+              className="self-start text-xl mt-6"
+              onClick={() => {
+                navigate("/quiz");
+              }}
+            >
+              Start Now
+            </Button>
           </div>
           {/* QR */}
           <div>
