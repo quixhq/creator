@@ -11,9 +11,18 @@ const JoinUsers = () => {
   // simulate users joining from 1 to 50
 
   useEffect(() => {
-    usersJoined > 50
-      ? setUsersJoined(50)
+    usersJoined > 10
+      ? null
       : setTimeout(() => setUsersJoined(usersJoined + 1), 500);
+  }, [usersJoined]);
+
+  // different time for the last 10 users
+  useEffect(() => {
+    if (usersJoined > 10) {
+      usersJoined > 50
+        ? setUsersJoined(50)
+        : setTimeout(() => setUsersJoined(usersJoined + 1), 2000);
+    }
   }, [usersJoined]);
 
   return (
@@ -31,7 +40,12 @@ const JoinUsers = () => {
             <p className="text-2xl">Or scan the QR code to join</p>
 
             <div className="mt-8">
-              <h1 className="font-medium text-5xl">{usersJoined}</h1>
+              <h1
+                className="font-medium text-6xl animate-number mb-2 dm-serif"
+                key={usersJoined}
+              >
+                {usersJoined}
+              </h1>
               <p className="text-2xl">Participants joined</p>
             </div>
 
