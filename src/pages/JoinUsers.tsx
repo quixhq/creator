@@ -2,9 +2,29 @@ import Logo from "@/components/Logo";
 import QR from "../assets/dummyqr.webp";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 const JoinUsers = () => {
   const navigate = useNavigate();
+  const [usersJoined, setUsersJoined] = useState(0);
+
+  // simulate users joining from 1 to 50
+
+  useEffect(() => {
+    usersJoined > 10
+      ? null
+      : setTimeout(() => setUsersJoined(usersJoined + 1), 500);
+  }, [usersJoined]);
+
+  // different time for the last 10 users
+  useEffect(() => {
+    if (usersJoined > 10) {
+      usersJoined > 50
+        ? setUsersJoined(50)
+        : setTimeout(() => setUsersJoined(usersJoined + 1), 2000);
+    }
+  }, [usersJoined]);
+
   return (
     <>
       <section className="container py-8">
@@ -22,8 +42,13 @@ const JoinUsers = () => {
             <p className="text-lg lg:text-2xl">Or scan the QR code to join</p>
 
             <div className="mt-8">
-              <h1 className="font-medium text-3xl lg:text-5xl">43</h1>
-              <p className="text-lg lg:text-2xl">Participants joined</p>
+              <h1
+                className="font-medium text-6xl animate-number mb-2 dm-serif"
+                key={usersJoined}
+              >
+                {usersJoined}
+              </h1>
+              <p className="text-2xl">Participants joined</p>
             </div>
 
             <Button
