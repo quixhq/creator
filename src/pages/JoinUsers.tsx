@@ -29,15 +29,17 @@ const JoinUsers = () => {
     <>
       <section className="container py-8">
         <Logo variant="coloured" />
-        <div className="flex justify-between gap-6 py-12 mt-12">
+        <div className="flex flex-col-reverse items-center lg:flex-row justify-between gap-6 py-12 mt-12">
           {/* Quiz Info */}
           <div className="flex flex-col gap-3">
-            <h1 className="text-6xl dm-serif">Worldwide Health Survery</h1>
-            <h1 className="text-3xl dm-serif">
+            <h1 className="text-4xl lg:text-6xl dm-serif text-center">
+              Worldwide Health Survery
+            </h1>
+            <h1 className="text-xl lg:text-3xl dm-serif">
               <span> Quiz ID: </span>
               <span className="italic font-semibold"> 123 456 </span>
             </h1>
-            <p className="text-2xl">Or scan the QR code to join</p>
+            <p className="text-lg lg:text-2xl">Or scan the QR code to join</p>
 
             <div className="mt-8">
               <h1
@@ -59,8 +61,8 @@ const JoinUsers = () => {
             </Button>
           </div>
           {/* QR */}
-          <div>
-            <img src={QR} alt="qr" className="w-80 h-80" />
+          <div className="shrink-0">
+            <img src={QR} alt="qr" className="w-64 lg:w-80 h-6w-64 lg:h-80" />
           </div>
         </div>
       </section>
