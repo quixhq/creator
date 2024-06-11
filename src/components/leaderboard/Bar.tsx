@@ -26,7 +26,7 @@ const Bar = ({ value }: { value: number }) => {
         className="bar bg-blue/80 h-8 rounded-full"
         style={{ width: `${width}%` }}
       ></div>
-      <span className="text-lg font-semibold">{score} Pts</span>
+      <span className="shrink-0 text-lg font-semibold">{score} Pts</span>
     </div>
   );
 };
