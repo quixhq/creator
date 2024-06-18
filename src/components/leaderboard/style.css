@@ -1,3 +1,23 @@
 .bar {
   transition: width 0.5s ease-in-out;
 }
+.blinker {
+  animation: blinker 1s linear infinite;
+}
+.animate-question {
+  animation: animate-question 0.5s ease-in-out;
+}
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+@keyframes animate-question {
+  /* animate from left */
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}

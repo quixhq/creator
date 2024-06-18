@@ -5,7 +5,7 @@ const Leaderboard = () => {
     <section className="container py-12">
       <h2 className="text-4xl font-semibold">Leaderboard🏆</h2>
 
-      <div className="flex items-center justify-between mt-12 text-xl font-semibold">
+      {/* <div className="flex items-center justify-between mt-12 text-xl font-semibold">
         <h2 className="bg-blue/20 text-blue font-bold px-4 py-2 rounded-lg text-base">
           Question 01
         </h2>
@@ -14,7 +14,7 @@ const Leaderboard = () => {
 
       <h1 className="text-2xl mt-8 font-medium">
         What is the most common cause of death in the world?
-      </h1>
+      </h1> */}
 
       <div className="flex flex-col gap-1 mt-8">
         <Bar value={89} />

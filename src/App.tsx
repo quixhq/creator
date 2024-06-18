@@ -4,7 +4,6 @@ import Home from "./pages/Home";
 import Creation from "./pages/Creation";
 import JoinUsers from "./pages/JoinUsers";
 import Quiz from "./pages/Quiz";
-import Leaderboard from "./pages/Leaderboard";
 
 function App() {
   return (
@@ -15,7 +14,7 @@ function App() {
           <Route path="/creation" element={<Creation />} />
           <Route path="/join" element={<JoinUsers />} />
           <Route path="/quiz" element={<Quiz />} />
-          <Route path="/leaderboard" element={<Leaderboard />} />
+          {/* <Route path="/leaderboard" element={<Leaderboard />} /> */}
         </Routes>
       </BrowserRouter>
     </>
