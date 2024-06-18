@@ -2,6 +2,7 @@ import Header from "@/components/quiz/Header";
 import Option from "@/components/quiz/Option";
 import { useEffect, useState } from "react";
 import Leaderboard from "./Leaderboard";
+import Logo from "@/components/Logo";
 
 const questionsList = [
   {
@@ -28,7 +29,7 @@ const questionsList = [
 
 const Quiz = () => {
   const [time, setTime] = useState<number>(30);
-  const [questions, setQuestions] = useState<any[]>(questionsList);
+  const [questions, _] = useState<any[]>(questionsList);
   const [currentQuestionNumber, setCurrentQuestionNumber] = useState<number>(0);
   const [showLeaderboard, setShowLeaderboard] = useState<boolean>(false);
   // sample questions array
@@ -107,7 +108,7 @@ const Quiz = () => {
             </div>
           </div>
 
-          <div className="absolute right-4 bottom-4">
+          {/* <div className="absolute right-4 bottom-4">
             <p>
               <button
                 onClick={() => setShowLeaderboard(true)}
@@ -116,11 +117,14 @@ const Quiz = () => {
                 Show Leaderboard
               </button>
             </p>
-          </div>
+          </div> */}
         </section>
       )}
 
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2">
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center">
+        <div className="w-20 sm:mb-8">
+          <Logo variant="coloured" />
+        </div>
         {currentQuestionNumber === questions.length - 1 ? (
           <p className="text-lg">
             End of the Quiz. Press <span className="font-bold">Enter</span> for
