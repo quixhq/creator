@@ -54,9 +54,12 @@ const Quiz = () => {
 
   // handle key press
   const handleKeyPress = (e: any) => {
+    setShowLeaderboard(false);
     if (e.key === "Enter") {
       if (currentQuestionNumber !== questions.length - 1) {
         setCurrentQuestionNumber(currentQuestionNumber + 1);
+      } else {
+        setShowLeaderboard(true);
       }
     }
   };
@@ -69,47 +72,67 @@ const Quiz = () => {
     };
   }, [currentQuestionNumber]);
 
-  return showLeaderboard ? (
-    <Leaderboard />
-  ) : (
-    <section className="container py-8 h-screen relative">
-      <Header time={time} />
+  return (
+    <>
+      {showLeaderboard ? (
+        <Leaderboard />
+      ) : (
+        <section className="container py-8 h-screen relative">
+          <Header time={time} />
 
-      <div className="flex flex-col sm:flex-row items-start gap-2 sm:items-center justify-between mt-12 text-xl font-semibold">
-        <h2 className="bg-blue/20 text-blue font-bold px-4 py-2 rounded-lg text-base">
-          Question {currentQuestionNumber + 1}
-        </h2>
-        <p>56 of 75 have answered</p>
+          <div className="flex flex-col sm:flex-row items-start gap-2 sm:items-center justify-between mt-12 text-xl font-semibold">
+            <h2 className="bg-blue/20 text-blue font-bold px-4 py-2 rounded-lg text-base">
+              Question {currentQuestionNumber + 1}
+            </h2>
+            <p>56 of 75 have answered</p>
+          </div>
+          {/* Questions */}
+
+          {/* Sample question on Health Survey  */}
+          <div key={currentQuestionNumber} className="animate-question">
+            <h1 className="text-2xl lg:text-5xl mt-8 font-medium">
+              {questions[currentQuestionNumber].question}
+            </h1>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-8 text-lg lg:text-2xl">
+              {questions[currentQuestionNumber].options.map(
+                (option: string, index: number) => (
+                  <Option
+                    key={index}
+                    option={option}
+                    number={(index + 1).toString()}
+                  />
+                )
+              )}
+            </div>
+          </div>
+
+          <div className="absolute right-4 bottom-4">
+            <p>
+              <button
+                onClick={() => setShowLeaderboard(true)}
+                className="text-blue/75 hover:text-blue font-semibold underline underline-offset-3 px-4 py-1 rounded-lg mt-2"
+              >
+                Show Leaderboard
+              </button>
+            </p>
+          </div>
+        </section>
+      )}
+
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2">
+        {currentQuestionNumber === questions.length - 1 ? (
+          <p className="text-lg">
+            End of the Quiz. Press <span className="font-bold">Enter</span> for
+            Leaderboard
+          </p>
+        ) : (
+          <p className="text-lg">
+            Press <span className="font-bold">Enter</span> for next question
+          </p>
+        )}
       </div>
-      {/* Questions */}
-
-      {/* Sample question on Health Survey  */}
-      <div key={currentQuestionNumber} className="animate-question">
-        <h1 className="text-2xl lg:text-5xl mt-8 font-medium">
-          {questions[currentQuestionNumber].question}
-        </h1>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-8 text-lg lg:text-2xl">
-          {questions[currentQuestionNumber].options.map(
-            (option: string, index: number) => (
-              <Option
-                key={index}
-                option={option}
-                number={(index + 1).toString()}
-              />
-            )
-          )}
-        </div>
-      </div>
-
-      {/* press enter for next question */}
-
-      <div className="absolute bottom-4 right-4">
-        <p>
-          Press <span className="font-bold">Enter</span> for next question
-        </p>
-      </div>
-    </section>
+    </>
   );
 };
 
