@@ -1,3 +1,12 @@
 .bar {
   transition: width 0.5s ease-in-out;
 }
+.blinker {
+  animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}

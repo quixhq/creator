@@ -1,10 +1,27 @@
 import Header from "@/components/quiz/Header";
 import Option from "@/components/quiz/Option";
+import { useEffect, useState } from "react";
 
 const Quiz = () => {
+  const [time, setTime] = useState<number>(30);
+
+  // simulate timer
+  const timer = setTimeout(() => {
+    setTime(time - 1);
+  }, 1000);
+
+  useEffect(() => {
+    if (time === 0) {
+      clearTimeout(timer);
+    }
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [time]);
+
   return (
     <section className="container py-8">
-      <Header />
+      <Header time={time} />
 
       <div className="flex flex-col sm:flex-row items-start gap-2 sm:items-center justify-between mt-12 text-xl font-semibold">
         <h2 className="bg-blue/20 text-blue font-bold px-4 py-2 rounded-lg text-base">
