@@ -8,6 +8,8 @@ const Header = ({ time }: { time: number }) => {
     setSpin(time * 12);
     if (time < 10) {
       setTimerColor("red");
+    } else {
+      setTimerColor("black");
     }
   }, [time]);
 
