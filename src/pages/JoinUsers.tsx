@@ -42,6 +42,65 @@ const childVariants = {
   },
 };
 
+// const animateNumberVariants1 = {
+//   // transition style: pop up number smoothly
+//   initial: {
+//     opacity: 1,
+//     y: 50,
+//   },
+//   final: {
+//     opacity: 1,
+//     y: 0,
+//     transition: {
+//       type: "spring",
+//       mass: 0.35,
+//       damping: 8,
+//       stiffness: 100,
+//     },
+//   },
+// };
+// const animateNumberVariants2 = {
+//   // transition style: shake number
+//   initial: {
+//     opacity: 0,
+//   },
+//   final: {
+//     opacity: 1,
+//     x: [0, -5, 5, -5, 5, 0],
+//     transition: {
+//       type: "spring",
+//       mass: 0.35,
+//       damping: 8,
+//       stiffness: 100,
+//       x: {
+//         duration: 0.4,
+//       },
+//     },
+//   },
+// };
+const animateNumberVariants3 = {
+  // transition style: bounce number
+  initial: {
+    opacity: 0,
+    scale: 0.8,
+    y: 20,
+  },
+  final: {
+    opacity: 1,
+    scale: 1,
+    y: [0, -10, 5, -5, 0],
+    transition: {
+      type: "spring",
+      mass: 0.35,
+      damping: 8,
+      stiffness: 100,
+      y: {
+        duration: 0.6,
+      },
+    },
+  },
+};
+
 const JoinUsers = () => {
   const navigate = useNavigate();
   const [usersJoined, setUsersJoined] = useState(0);
@@ -90,12 +149,15 @@ const JoinUsers = () => {
             <p className="text-lg lg:text-2xl">Or scan the QR code to join</p>
 
             <div className="mt-8">
-              <h1
-                className="font-medium text-6xl animate-number mb-2 dm-serif"
+              <motion.h1
+                variants={animateNumberVariants3}
+                initial="initial"
+                animate="final"
                 key={usersJoined}
+                className="font-medium text-6xl mb-2 dm-serif inline-block"
               >
                 {usersJoined}
-              </h1>
+              </motion.h1>
               <p className="text-2xl">Participants joined</p>
             </div>
 
