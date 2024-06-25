@@ -4,6 +4,44 @@ import { useEffect, useState } from "react";
 import Leaderboard from "./Leaderboard";
 import Logo from "@/components/Logo";
 
+import { motion } from "framer-motion";
+
+const routeVariants = {
+  // transition style: pop up
+  initial: {
+    opacity: 0,
+    scale: 0.8,
+  },
+  final: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      type: "spring",
+      mass: 0.35,
+      damping: 8,
+      stiffness: 100,
+    },
+  },
+};
+
+const childVariants = {
+  // transition style: pop up
+  initial: {
+    opacity: 0,
+    scale: 0.8,
+  },
+  final: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      type: "spring",
+      mass: 0.35,
+      damping: 8,
+      stiffness: 100,
+    },
+  },
+};
+
 const questionsList = [
   {
     question: "What is the most common cause of death in the world?",
@@ -78,19 +116,37 @@ const Quiz = () => {
       {showLeaderboard ? (
         <Leaderboard />
       ) : (
-        <section className="container py-8 h-screen relative">
+        <motion.section
+          variants={routeVariants}
+          initial="initial"
+          animate="final"
+          key={currentQuestionNumber}
+          className="container py-8 h-screen relative"
+        >
           <Header time={time} />
 
-          <div className="flex flex-col sm:flex-row items-start gap-2 sm:items-center justify-between mt-12 text-xl font-semibold">
+          <motion.div
+            variants={childVariants}
+            initial="initial"
+            animate="final"
+            // key={currentQuestionNumber}
+            className="flex flex-col sm:flex-row items-start gap-2 sm:items-center justify-between mt-12 text-xl font-semibold"
+          >
             <h2 className="bg-blue/20 text-blue font-bold px-4 py-2 rounded-lg text-base">
               Question {currentQuestionNumber + 1}
             </h2>
             <p>56 of 75 have answered</p>
-          </div>
+          </motion.div>
           {/* Questions */}
 
           {/* Sample question on Health Survey  */}
-          <div key={currentQuestionNumber} className="animate-question">
+          <motion.div
+            variants={childVariants}
+            initial="initial"
+            animate="final"
+            // key={currentQuestionNumber}
+            // className="animate-question"
+          >
             <h1 className="text-2xl lg:text-5xl mt-8 font-medium">
               {questions[currentQuestionNumber].question}
             </h1>
@@ -106,7 +162,7 @@ const Quiz = () => {
                 )
               )}
             </div>
-          </div>
+          </motion.div>
 
           {/* <div className="absolute right-4 bottom-4">
             <p>
@@ -118,7 +174,7 @@ const Quiz = () => {
               </button>
             </p>
           </div> */}
-        </section>
+        </motion.section>
       )}
 
       <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center">

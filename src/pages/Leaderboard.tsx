@@ -1,8 +1,50 @@
 import Bar from "@/components/leaderboard/Bar";
+import { motion } from "framer-motion";
+
+const routeVariants = {
+  // transition style: pop up
+  initial: {
+    opacity: 0,
+    scale: 0.8,
+  },
+  final: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      type: "spring",
+      mass: 0.35,
+      damping: 8,
+      stiffness: 100,
+    },
+  },
+};
+
+const childVariants = {
+  // transition style: pop up
+  initial: {
+    opacity: 0,
+    scale: 0.8,
+  },
+  final: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      type: "spring",
+      mass: 0.35,
+      damping: 8,
+      stiffness: 100,
+    },
+  },
+};
 
 const Leaderboard = () => {
   return (
-    <section className="container py-12">
+    <motion.section
+      variants={routeVariants}
+      initial="initial"
+      animate="final"
+      className="container py-12"
+    >
       <h2 className="text-4xl font-semibold">Leaderboard🏆</h2>
 
       {/* <div className="flex items-center justify-between mt-12 text-xl font-semibold">
@@ -16,7 +58,12 @@ const Leaderboard = () => {
         What is the most common cause of death in the world?
       </h1> */}
 
-      <div className="flex flex-col gap-1 mt-8">
+      <motion.div
+        variants={childVariants}
+        initial="initial"
+        animate="final"
+        className="flex flex-col gap-1 mt-8"
+      >
         <Bar value={89} />
         <Bar value={80} />
         <Bar value={78} />
@@ -27,8 +74,8 @@ const Leaderboard = () => {
         <Bar value={55} />
         <Bar value={48} />
         <Bar value={40} />
-      </div>
-    </section>
+      </motion.div>
+    </motion.section>
   );
 };
 
