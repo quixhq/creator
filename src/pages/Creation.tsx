@@ -11,6 +11,43 @@ import CreationNav from "@/components/creation/CreationNav";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import Settings from "@/components/creation/Settings";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+
+const routeVariants = {
+  // transition style: slide right
+  initial: {
+    opacity: 0,
+    y: "-100vh",
+  },
+  final: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: "spring",
+      mass: 0.35,
+      damping: 8,
+      stiffness: 100,
+    },
+  },
+};
+
+const childVariants = {
+  // transition style: slide right
+  initial: {
+    opacity: 0,
+    y: "-100vh",
+  },
+  final: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: "spring",
+      mass: 0.35,
+      damping: 8,
+      stiffness: 100,
+    },
+  },
+};
 
 const driverObj = driver({
   popoverClass: "driverjs-theme",
@@ -91,9 +128,19 @@ const Creation = () => {
   return (
     <>
       <CreationNav />
-      <section className="container relative bottom-8">
+      <motion.section
+        variants={routeVariants}
+        initial="initial"
+        animate="final"
+        className="container relative bottom-8"
+      >
         <Logo variant="coloured" />
-        <div className="flex justify-between gap-4 flex-col md:flex-row">
+        <motion.div
+          variants={childVariants}
+          initial="initial"
+          animate="final"
+          className="flex justify-between gap-4 flex-col md:flex-row"
+        >
           <form className="mt-12 w-full md:w-1/2">
             <input
               type="text"
@@ -171,8 +218,8 @@ const Creation = () => {
               Take a tour
             </Button>
           </aside>
-        </div>
-      </section>
+        </motion.div>
+      </motion.section>
     </>
   );
 };

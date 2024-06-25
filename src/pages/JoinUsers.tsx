@@ -4,6 +4,103 @@ import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
+import { motion } from "framer-motion";
+
+const routeVariants = {
+  // transition style: slide right
+  initial: {
+    opacity: 0,
+    y: "-100vh",
+  },
+  final: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: "spring",
+      mass: 0.35,
+      damping: 8,
+      stiffness: 100,
+    },
+  },
+};
+
+const childVariants = {
+  // transition style: slide right
+  initial: {
+    opacity: 0,
+    y: "-100vh",
+  },
+  final: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: "spring",
+      mass: 0.35,
+      damping: 8,
+      stiffness: 100,
+    },
+  },
+};
+
+// const animateNumberVariants1 = {
+//   // transition style: pop up number smoothly
+//   initial: {
+//     opacity: 1,
+//     y: 50,
+//   },
+//   final: {
+//     opacity: 1,
+//     y: 0,
+//     transition: {
+//       type: "spring",
+//       mass: 0.35,
+//       damping: 8,
+//       stiffness: 100,
+//     },
+//   },
+// };
+// const animateNumberVariants2 = {
+//   // transition style: shake number
+//   initial: {
+//     opacity: 0,
+//   },
+//   final: {
+//     opacity: 1,
+//     x: [0, -5, 5, -5, 5, 0],
+//     transition: {
+//       type: "spring",
+//       mass: 0.35,
+//       damping: 8,
+//       stiffness: 100,
+//       x: {
+//         duration: 0.4,
+//       },
+//     },
+//   },
+// };
+const animateNumberVariants3 = {
+  // transition style: bounce number
+  initial: {
+    opacity: 0,
+    scale: 0.8,
+    y: 20,
+  },
+  final: {
+    opacity: 1,
+    scale: 1,
+    y: [0, -10, 5, -5, 0],
+    transition: {
+      type: "spring",
+      mass: 0.35,
+      damping: 8,
+      stiffness: 100,
+      y: {
+        duration: 0.6,
+      },
+    },
+  },
+};
+
 const JoinUsers = () => {
   const navigate = useNavigate();
   const [usersJoined, setUsersJoined] = useState(0);
@@ -27,9 +124,19 @@ const JoinUsers = () => {
 
   return (
     <>
-      <section className="container py-8">
+      <motion.section
+        variants={routeVariants}
+        initial="initial"
+        animate="final"
+        className="container py-8"
+      >
         <Logo variant="coloured" />
-        <div className="flex flex-col-reverse items-center lg:flex-row justify-between gap-6 py-12 mt-12">
+        <motion.div
+          variants={childVariants}
+          initial="initial"
+          animate="final"
+          className="flex flex-col-reverse items-center lg:flex-row justify-between gap-6 py-12 mt-12"
+        >
           {/* Quiz Info */}
           <div className="flex flex-col gap-3">
             <h1 className="text-4xl lg:text-6xl dm-serif text-center">
@@ -42,12 +149,15 @@ const JoinUsers = () => {
             <p className="text-lg lg:text-2xl">Or scan the QR code to join</p>
 
             <div className="mt-8">
-              <h1
-                className="font-medium text-6xl animate-number mb-2 dm-serif"
+              <motion.h1
+                variants={animateNumberVariants3}
+                initial="initial"
+                animate="final"
                 key={usersJoined}
+                className="font-medium text-6xl mb-2 dm-serif inline-block"
               >
                 {usersJoined}
-              </h1>
+              </motion.h1>
               <p className="text-2xl">Participants joined</p>
             </div>
 
@@ -64,8 +174,8 @@ const JoinUsers = () => {
           <div className="shrink-0">
             <img src={QR} alt="qr" className="w-64 lg:w-80 h-6w-64 lg:h-80" />
           </div>
-        </div>
-      </section>
+        </motion.div>
+      </motion.section>
     </>
   );
 };
