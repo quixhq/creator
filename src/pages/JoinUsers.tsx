@@ -2,9 +2,10 @@ import Logo from "@/components/Logo";
 import QR from "../assets/dummyqr.webp";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import { motion } from "framer-motion";
+import { useSocket } from "@/SocketContext";
 
 const routeVariants = {
   // transition style: slide right
@@ -42,42 +43,6 @@ const childVariants = {
   },
 };
 
-// const animateNumberVariants1 = {
-//   // transition style: pop up number smoothly
-//   initial: {
-//     opacity: 1,
-//     y: 50,
-//   },
-//   final: {
-//     opacity: 1,
-//     y: 0,
-//     transition: {
-//       type: "spring",
-//       mass: 0.35,
-//       damping: 8,
-//       stiffness: 100,
-//     },
-//   },
-// };
-// const animateNumberVariants2 = {
-//   // transition style: shake number
-//   initial: {
-//     opacity: 0,
-//   },
-//   final: {
-//     opacity: 1,
-//     x: [0, -5, 5, -5, 5, 0],
-//     transition: {
-//       type: "spring",
-//       mass: 0.35,
-//       damping: 8,
-//       stiffness: 100,
-//       x: {
-//         duration: 0.4,
-//       },
-//     },
-//   },
-// };
 const animateNumberVariants3 = {
   // transition style: bounce number
   initial: {
@@ -104,23 +69,20 @@ const animateNumberVariants3 = {
 const JoinUsers = () => {
   const navigate = useNavigate();
   const [usersJoined, setUsersJoined] = useState(0);
-
-  // simulate users joining from 1 to 50
-
+  const { socket } = useSocket(); // Access the socket instance from the context
   useEffect(() => {
-    usersJoined > 10
-      ? null
-      : setTimeout(() => setUsersJoined(usersJoined + 1), 500);
-  }, [usersJoined]);
+    if (socket) {
+      socket.on("user-joined", (data) => {
+        console.log("New user joined:", data);
+        setUsersJoined((prevCount) => prevCount + 1); // Increment the number of users
+      });
 
-  // different time for the last 10 users
-  useEffect(() => {
-    if (usersJoined > 10) {
-      usersJoined > 50
-        ? setUsersJoined(50)
-        : setTimeout(() => setUsersJoined(usersJoined + 1), 2000);
+      // Cleanup listener on component unmount
+      return () => {
+        socket.off("user-joined");
+      };
     }
-  }, [usersJoined]);
+  }, [socket]);
 
   return (
     <>
@@ -144,7 +106,11 @@ const JoinUsers = () => {
             </h1>
             <h1 className="text-xl lg:text-3xl dm-serif">
               <span> Quiz ID: </span>
-              <span className="italic font-semibold"> 123 456 </span>
+              <span className="italic font-semibold">
+                {localStorage.getItem("sessionId")
+                  ? localStorage.getItem("sessionId")
+                  : "XXXX-XXXX"}
+              </span>
             </h1>
             <p className="text-lg lg:text-2xl">Or scan the QR code to join</p>
 

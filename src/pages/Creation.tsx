@@ -12,6 +12,8 @@ import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import Settings from "@/components/creation/Settings";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { io, Socket } from "socket.io-client";
+import { SOCKET_SERVER_URL } from "@/SocketContext";
 
 const routeVariants = {
   // transition style: slide right
@@ -100,6 +102,7 @@ type Question = {
   id: number;
   content: string;
 };
+const socket: Socket = io(SOCKET_SERVER_URL); // adjust URL as needed
 const Creation = () => {
   const navigate = useNavigate();
 
@@ -125,6 +128,17 @@ const Creation = () => {
     console.log(questions);
     localStorage.setItem("questions", JSON.stringify(questions));
   }, [questions]);
+
+  const launchQuiz = () => {
+    const sessionId = "1234"; // or generate dynamically
+    socket.emit("launch-quiz", { sessionId });
+    // console the received sessionId
+    socket.on("launch-quiz-response", (data) => {
+      console.log("Quiz launched with session ID:", data.sessionId);
+      localStorage.setItem("sessionId", data.sessionId);
+    });
+    navigate("/join");
+  };
   return (
     <>
       <CreationNav />
@@ -199,7 +213,7 @@ const Creation = () => {
               </div>
               <Button
                 onClick={() => {
-                  navigate("/join");
+                  launchQuiz();
                 }}
                 className="mt-4 w-full"
                 id="go-live"

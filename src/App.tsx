@@ -6,14 +6,17 @@ import JoinUsers from "./pages/JoinUsers";
 import Quiz from "./pages/Quiz";
 
 import { AnimatePresence } from "framer-motion";
+import { SocketProvider } from "./SocketContext";
 
 function App() {
   return (
     <>
       <BrowserRouter>
-        <LocationProvider>
-          <RoutesWithAnimations />
-        </LocationProvider>
+        <SocketProvider>
+          <LocationProvider>
+            <RoutesWithAnimations />
+          </LocationProvider>
+        </SocketProvider>
       </BrowserRouter>
     </>
   );
