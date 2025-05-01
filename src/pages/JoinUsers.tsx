@@ -3,7 +3,8 @@ import QR from "../assets/dummyqr.webp";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
-
+import { io, Socket } from "socket.io-client";
+import { SOCKET_SERVER_URL } from "@/SocketContext";
 import { motion } from "framer-motion";
 import { useSocket } from "@/SocketContext";
 
@@ -65,7 +66,23 @@ const animateNumberVariants3 = {
     },
   },
 };
+const socket: Socket = io(SOCKET_SERVER_URL); // adjust URL as needed
 
+const sendNextQuestion = () => {
+  const sessionId = localStorage.getItem("sessionId") || "1234"; // Retrieve session ID
+  const questionId = "2"; // Update to the next question ID
+  const decryptionKey = Math.random().toString(36).substring(2, 15); // Generate a random key
+
+  socket.emit("next-question-from-creator", {
+    sessionId,
+    questionId,
+    decryptionKey,
+  });
+
+  console.log(
+    `Sent question ${questionId} with decryption key: ${decryptionKey}`
+  );
+};
 const JoinUsers = () => {
   const navigate = useNavigate();
   const [usersJoined, setUsersJoined] = useState(0);
@@ -142,6 +159,12 @@ const JoinUsers = () => {
           </div>
         </motion.div>
       </motion.section>
+      <Button
+        onClick={sendNextQuestion}
+        className="mt-4 w-full bg-green-500 text-white font-semibold hover:bg-green-600"
+      >
+        Send Next Question
+      </Button>
     </>
   );
 };

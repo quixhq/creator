@@ -51,6 +51,53 @@ const childVariants = {
   },
 };
 
+const dummyQuestions = [
+  {
+    questionId: '1',
+    question: 'What is the capital of France?',
+    options: [
+      { optionId: '1', text: 'Berlin' },
+      { optionId: '2', text: 'Madrid' },
+      { optionId: '3', text: 'Paris' },
+      { optionId: '4', text: 'Rome' },
+    ],
+    answerKey: ['3'],
+  },
+  {
+    questionId: '2',
+    question: 'What is the largest planet in our solar system?',
+    options: [
+      { optionId: '1', text: 'Earth' },
+      { optionId: '2', text: 'Jupiter' },
+      { optionId: '3', text: 'Mars' },
+      { optionId: '4', text: 'Saturn' },
+    ],
+    answerKey: ['2'],
+  },
+  {
+    questionId: '3',
+    question: 'What is the chemical symbol for gold?',
+    options: [
+      { optionId: '1', text: 'Au' },
+      { optionId: '2', text: 'Ag' },
+      { optionId: '3', text: 'Fe' },
+      { optionId: '4', text: 'Hg' },
+    ],
+    answerKey: ['1'],
+  },
+  {
+    questionId: '4',
+    question: 'What is the smallest prime number?',
+    options: [
+      { optionId: '1', text: '0' },
+      { optionId: '2', text: '1' },
+      { optionId: '3', text: '2' },
+      { optionId: '4', text: '3' },
+    ],
+    answerKey: ['3'],
+  },
+]
+
 const driverObj = driver({
   popoverClass: "driverjs-theme",
   showProgress: true,
@@ -131,12 +178,14 @@ const Creation = () => {
 
   const launchQuiz = () => {
     const sessionId = "1234"; // or generate dynamically
-    socket.emit("launch-quiz", { sessionId });
-    // console the received sessionId
+    const questions = [dummyQuestions]; // Retrieve questions from local storage or state
+    socket.emit("launch-quiz", { sessionId, questions });
+
     socket.on("launch-quiz-response", (data) => {
       console.log("Quiz launched with session ID:", data.sessionId);
       localStorage.setItem("sessionId", data.sessionId);
     });
+
     navigate("/join");
   };
   return (
