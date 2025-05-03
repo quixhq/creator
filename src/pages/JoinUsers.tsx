@@ -2,7 +2,7 @@ import Logo from "@/components/Logo";
 import QR from "../assets/dummyqr.webp";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { io, Socket } from "socket.io-client";
 import { SOCKET_SERVER_URL } from "@/SocketContext";
 import { motion } from "framer-motion";
