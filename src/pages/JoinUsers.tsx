@@ -72,15 +72,16 @@ const sendNextQuestion = () => {
   const sessionId = localStorage.getItem("sessionId") || "1234"; // Retrieve session ID
   const questionId = "2"; // Update to the next question ID
   const decryptionKey = Math.random().toString(36).substring(2, 15); // Generate a random key
-
+  const timestamp = Date.now(); // Current timestamp
   socket.emit("next-question-from-creator", {
     sessionId,
     questionId,
     decryptionKey,
+    timestamp, 
   });
 
   console.log(
-    `Sent question ${questionId} with decryption key: ${decryptionKey}`
+    `Sent question ${questionId} with decryption key: ${decryptionKey} at ${timestamp}`
   );
 };
 const JoinUsers = () => {

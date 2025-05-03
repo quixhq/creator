@@ -2,6 +2,8 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { io, Socket } from "socket.io-client";
 
 export const SOCKET_SERVER_URL = "https://quix-server.onrender.com"; // Change if needed
+// export const SOCKET_SERVER_URL = "http://localhost:5175"; // Change if needed
+
 
 type SocketContextType = {
   socket: Socket | null;
