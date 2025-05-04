@@ -69,12 +69,11 @@ const animateNumberVariants3 = {
 const socket: Socket = io(SOCKET_SERVER_URL); // adjust URL as needed
 
 const sendNextQuestion = () => {
-  const sessionId = localStorage.getItem("sessionId") || "1234"; // Retrieve session ID
+  // const sessionId = localStorage.getItem("sessionId") || "1234"; // Retrieve session ID
   const questionId = "2"; // Update to the next question ID
   const decryptionKey = Math.random().toString(36).substring(2, 15); // Generate a random key
   const timestamp = Date.now(); // Current timestamp
   socket.emit("next-question-from-creator", {
-    sessionId,
     questionId,
     decryptionKey,
     timestamp, 
